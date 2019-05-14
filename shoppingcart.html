@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SHOPPING CART</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body style="background-image:url('3.jpg');background-size: cover;background-repeat: no-repeat;"><br>
+<div style="position: relative;"><h2><B><i class="fa fa-shopping-cart mr-3" style="font-size:36px"></i>SHOPPING CART</B><i class="fa fa-shopping-cart" style="font-size:40px; float:right; margin-right:30px;"><span class="badge badge-secondary" id="tc" style="margin-left:7px;"></span></i></h2></div><hr>
+<div class="col-md-6" style="position: relative; top: 20%">
+
+		<ul class="container-fluid">
+			<li ><b>CLOTHES</b><input type="number"id="1"  min=0 name="clothes" style="width:10%; float: right;"><button class="float-right" name="bt1" id="bt1">RESET</button></li><hr>
+			<li><b>ACCESSORIES</b><input type="number"id="2"  min=0 name="accessory" style="width:10%; float: right;"><button class="float-right" id="bt2">RESET</button></li><hr>
+			<li><b>ELECTRONICS</b><input type="number"  id="3" min=0 name="electronic" style="width:10%; float: right;"><button class="float-right" id="bt3">RESET</button></li><hr>
+			<li><b>BAGPACKS</b><input type="number" id="4"  min=0 name="bag" style="width:10%; float: right;"><button class="float-right" id="bt4">RESET</button></li><hr>
+			<li><b>SHOES</b><input type="number"id="5"  min=0 name="shoes" style="width:10%; float: right;"><button class="float-right" id="bt5">RESET</button></li><hr>
+			<button type="input" id="add"><b>TOTAL ITEMS</b></button>
+            <button type="input" id="view" data-toggle="modal" data-target="#myModal"><b>VIEW CART</b></button>
+            
+<!-------------------------------------------------------------------------------------------MODAL----------------------------------------------------------------------------------------------------------->
+			<div class="modal" id="myModal">
+		        <div class="modal-dialog">
+		          <div class="modal-content">
+		      
+		            <div class="modal-header">
+		             <h4 class="modal-title"><b><i class="fa fa-shopping-cart mr-3" style="font-size:36px"></i>ITEMS IN CART</b></h4>
+		              <button type="button" class="close" data-dismiss="modal">&times;</button>
+		            </div>
+		        
+		           <div class="modal-body small" > <p id="data">  </p>
+		           	<ul></ul>
+		           </div>
+		        
+		           <div class="modal-footer">
+		             <button type="link" href="#" class="btn btn-info" data-dismiss="modal">Check Out</button>
+		           </div>
+		        
+                  </div>
+                </div>
+		    </div>
+		</ul>
+</div>
+
+
+<!----------------------------------------------------------------------------------------------SCRIPT PART--------------------------------------------------------------------------------------------------->
+<script >
+	document.getElementById("add").addEventListener("click", myFunction);
+	var cart ='{"clothes":0,"accessory":0,"electronic":0,"bag":0,"shoes":0}'
+	var cartData = JSON.parse(cart);
+	var sum;
+	function myFunction() {
+		cartData.clothes = Number(document.getElementById("1").value);
+		cartData.accessory = Number(document.getElementById("2").value);
+		cartData.electronic = Number(document.getElementById("3").value);
+		cartData.bag = Number(document.getElementById("4").value);
+		cartData.shoes = Number(document.getElementById("5").value);
+		sum = cartData.clothes + cartData.accessory + cartData.electronic + cartData.bag + cartData.shoes;
+		document.getElementById("tc").innerHTML = sum;
+    }
+
+
+	document.getElementById("bt1").addEventListener("click", myClothes);
+	function myClothes(){
+		cartData.clothes=0;
+		document.getElementById("1").value = 0;
+		myFunction();
+	}
+	document.getElementById("bt2").addEventListener("click", myAccesory);
+	function myAccesory(){
+		cartData.accessory=0;
+		document.getElementById("2").value = 0;
+		myFunction();
+    }
+    document.getElementById("bt3").addEventListener("click", myElectronics);
+	function myElectronics(){
+		cartData.electronic=0;
+		document.getElementById("3").value = 0;
+		myFunction();
+    }
+    document.getElementById("bt4").addEventListener("click", myBags);
+	function myBags(){
+		cartData.bag=0;
+		document.getElementById("4").value = 0;
+		myFunction();
+    }
+    document.getElementById("bt5").addEventListener("click", myShoes);
+	function myShoes(){
+		cartData.shoes=0;
+		document.getElementById("5").value = 0;
+		myFunction();
+    }
+    
+
+	document.getElementById("view").addEventListener("click", cartDetails);
+	function cartDetails(){
+        cartData.clothes = Number(document.getElementById("1").value);
+		cartData.accessory = Number(document.getElementById("2").value);
+		cartData.electronic = Number(document.getElementById("3").value);
+		cartData.bag = Number(document.getElementById("4").value);
+		cartData.shoes = Number(document.getElementById("5").value);
+		document.getElementById("data").innerHTML  = "<li> CLOTHES: " + cartData.clothes + "</li> <li> ACCESORIES "  + cartData.accessory +"</li> <li> SHOES: " + cartData.shoes +"</li> <li> ELECTRONICS " + cartData.electronic +  "</li> <li> BAGS: " + cartData.bag +"</li>";
+		
+	}
+</script>
+</body>
+</html>
